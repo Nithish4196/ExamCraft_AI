@@ -21,7 +21,8 @@ export default function AnswerEvaluator() {
         const text = await extractTextFromPDF(file);
         setQuestionText(text.slice(0, 8000)); 
       } catch (err) {
-        setError("Failed to parse Question Paper PDF.");
+        console.error("Question PDF Parse Error:", err);
+        setError(`Failed to parse Question Paper PDF. ${err.message || ""}`);
       } finally {
         setLoadingPdfQuestion(false);
       }
@@ -41,7 +42,8 @@ export default function AnswerEvaluator() {
         }
         setScriptText(text.slice(0, 10000)); 
       } catch (err) {
-        setError("Failed to parse Script PDF.");
+        console.error("Script PDF Parse Error:", err);
+        setError(`Failed to parse Script PDF. ${err.message || ""}`);
       } finally {
         setLoadingPdfScript(false);
       }
