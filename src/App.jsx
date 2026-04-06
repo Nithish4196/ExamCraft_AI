@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Sparkles, FileQuestion, BookOpenCheck, LineChart, ArrowLeft } from "lucide-react";
+import { Sparkles, FileQuestion, BookOpenCheck, LineChart, ArrowLeft, BrainCircuit } from "lucide-react";
 import QuestionGenerator from "./components/QuestionGenerator";
 import AnswerGenerator from "./components/AnswerGenerator";
 import AnswerEvaluator from "./components/AnswerEvaluator";
+import QuizGenerator from "./components/QuizGenerator";
 import "./index.css";
 
 export default function App() {
@@ -16,6 +17,8 @@ export default function App() {
         return <AnswerGenerator />;
       case "evaluator":
         return <AnswerEvaluator />;
+      case "quiz-gen":
+        return <QuizGenerator />;
       default:
         return (
           <div className="dashboard">
@@ -41,6 +44,12 @@ export default function App() {
                 <div className="card-icon"><LineChart size={40} /></div>
                 <h3>Evaluate Answer Script</h3>
                 <p>Upload student scripts and auto-grade them using AI analysis.</p>
+              </button>
+
+              <button className="dash-card" onClick={() => setCurrentView("quiz-gen")}>
+                <div className="card-icon"><BrainCircuit size={40} /></div>
+                <h3>Topic Quiz Generator</h3>
+                <p>Generate customizable multiple-choice quizzes on any specific topic.</p>
               </button>
             </div>
           </div>

@@ -63,3 +63,9 @@ export const evaluateScript = async (questionContext, studentScript) => {
   const usr = `Below is the original question/topic:\n"${questionContext}"\n\nHere is the student's submitted answer script text:\n"${studentScript}"\n\nPlease evaluate providing the Marks, Accuracy %, and constructive feedback.`;
   return await executeAI(sys, usr);
 };
+
+export const generateQuiz = async (topic, numQuestions = 5) => {
+  const sys = "You are an expert AI quiz master. Generate a multiple-choice quiz. For each question, provide 4 options (A, B, C, D) and indicate the correct answer. Format clearly.";
+  const usr = `Generate exactly ${numQuestions} multiple-choice questions on the topic: "${topic}".`;
+  return await executeAI(sys, usr);
+};

@@ -37,7 +37,7 @@ export default function AnswerEvaluator() {
         setError("");
         const text = await extractTextFromPDF(file);
         if(!text.trim()) {
-           setError("No text detected. If this is a handwritten image PDF, it requires OCR which is not natively supported by the browser.");
+           setError("No text could be detected, even after running OCR fallback.");
            return;
         }
         setScriptText(text.slice(0, 10000)); 
@@ -104,7 +104,7 @@ export default function AnswerEvaluator() {
           <input type="file" id="eval-script" accept=".pdf" onChange={handleScriptUpload} className="hidden-input"/>
           <label htmlFor="eval-script" className="upload-label">
             <UploadCloud size={40} className="text-blue" />
-            <span>{loadingPdfScript ? "Extracting Script Text..." : "Upload Handwritten/Typed Student Answer PDF"}</span>
+            <span>{loadingPdfScript ? "Extracting Text / Running OCR processing..." : "Upload Handwritten/Typed Student Answer PDF"}</span>
           </label>
         </div>
 

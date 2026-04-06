@@ -10,6 +10,7 @@ export default function QuestionGenerator() {
   const [loadingAi, setLoadingAi] = useState(false);
   const [questions, setQuestions] = useState("");
   const [error, setError] = useState("");
+  const [numQuestions, setNumQuestions] = useState(5);
 
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
@@ -34,7 +35,7 @@ export default function QuestionGenerator() {
       setLoadingAi(true);
       setError("");
       setQuestions("");
-      const result = await generateQuestions(inputText, 5);
+      const result = await generateQuestions(inputText, numQuestions);
       setQuestions(result);
     } catch (err) {
       setError(err.message || "Failed to generate.");
@@ -82,8 +83,20 @@ export default function QuestionGenerator() {
           )}
         </div>
 
+        <div className="mb-4">
+          <label className="input-label">Number of Questions to Generate:</label>
+          <input 
+            type="number" 
+            value={numQuestions}
+            onChange={(e) => setNumQuestions(e.target.value)}
+            min="1"
+            max="50"
+            className="premium-input mb-4"
+          />
+        </div>
+
         <button className="btn-primary" onClick={handleGenerate} disabled={loadingAi || loadingPdf || !inputText}>
-          {loadingAi ? "Generating..." : <><Sparkles size={18}/> Generate 5 Questions</>}
+          {loadingAi ? "Generating..." : <><Sparkles size={18}/> Generate {numQuestions} Questions</>}
         </button>
       </div>
 
